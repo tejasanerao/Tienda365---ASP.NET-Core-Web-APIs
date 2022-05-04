@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Tienda365.API</name>
+    </assembly>
+    <members>
+        <member name="M:Tienda365.API.Controllers.AuthenticationController.Register(Tienda365.API.DTO.RegisterRequest)">
+            <summary>
+            New User Registration
+            </summary>
+        </member>
+        <member name="M:Tienda365.API.Controllers.AuthenticationController.Login(Tienda365.API.DTO.Requests.LoginRequest)">
+            <summary>
+            User Login
+            </summary>
+        </member>
+        <member name="M:Tienda365.API.Controllers.AuthenticationController.ForgotPassword(Tienda365.API.DTO.Requests.ForgotPasswordRequest)">
+            <summary>
+            Forgot Password Request
+            </summary>
+        </member>
+        <member name="M:Tienda365.API.Controllers.AuthenticationController.ResetPassword(Tienda365.API.DTO.Requests.ResetPasswordModel)">
+            <summary>
+            Reset Password Request
+            </summary>
+        </member>
+        <member name="M:Tienda365.API.Controllers.CartController.GetCartItems">
+            <summary>
+            Get items in cart
+            </summary>
+        </member>
+        <member name="M:Tienda365.API.Controllers.CartController.AddToCart(Tienda365.API.DTO.Requests.CartItemRequest)">
+            <summary>
+            Add item to cart
+            </summary>
+        </member>
+        <member name="M:Tienda365.API.Controllers.CartController.UpdateCart(Tienda365.API.DTO.Requests.CartItemRequest)">
+            <summary>
+            Update item in cart
+            </summary>
+        </member>
+        <member name="M:Tienda365.API.Controllers.CartController.DeleteCartItem(System.Int32)">
+            <summary>
+            Delete item from cart
+            </summary>
+            <remarks>
+            
+            Route -> /api/cart/{product-id}
+            
+            </remarks>
+        </member>
+        <member name="M:Tienda365.API.Controllers.OrderController.GetOrders">
+            <summary>
+            Get all the orders of a user
+            </summary>
+        </member>
+        <member name="M:Tienda365.API.Controllers.OrderController.PlaceOrder">
+            <summary>
+            Place the Order for a user
+            </summary>
+        </member>
+        <member name="M:Tienda365.API.Controllers.ProductsController.GetProducts(System.Int32,System.Int32)">
+            <summary>
+            Get all Products
+            </summary>
+            <remarks>
+            Query Parameters
+            
+            </remarks>
+            <param name="limit">Number of items per page</param>
+            <param name="page">Current page number</param>
+        </member>
+        <member name="M:Tienda365.API.Controllers.ProductsController.GetProductbyCategory(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Get products by category(id)
+            </summary>
+            <remarks>
+            Query Parameters
+            
+            </remarks>
+            <param name="limit">Number of items per page</param>
+            <param name="page">Current page number</param>
+        </member>
+        <member name="M:Tienda365.API.Controllers.ProductsController.GetProductbyName(System.String,System.Int32,System.Int32)">
+            <summary>
+            Search product by name
+            </summary>        
+            <remarks>
+            Query Parameters
+            
+            </remarks>
+            <param name="limit">Number of items per page</param>
+            <param name="page">Current page number</param>
+        </member>
+        <member name="M:Tienda365.API.Controllers.ProductsController.AddNewProduct(Tienda365.API.DTO.Requests.ProductRequest)">
+            <summary>
+            Add a new product
+            </summary>
+        </member>
+        <member name="P:Tienda365.API.DTO.Requests.ProductRequest.Name">
+            <summary>
+            Name of the product
+            </summary>
+        </member>
+        <member name="P:Tienda365.API.DTO.Requests.ProductRequest.CategoryId">
+            <summary>
+            Category to which this prodcut belongs, if you dont know the category consult admin/db
+            </summary>
+        </member>
+        <member name="P:Tienda365.API.DTO.Requests.ProductRequest.MRP">
+            <summary>
+            the maximum retail price
+            </summary>
+        </member>
+        <member name="P:Tienda365.API.DTO.Requests.ProductRequest.Discount">
+            <summary>
+            The discount offered
+            </summary>
+        </member>
+        <member name="P:Tienda365.API.DTO.Requests.ProductRequest.InStock">
+            <summary>
+            Defines if the product is in stock or not
+            </summary>
+        </member>
+        <member name="P:Tienda365.API.DTO.Requests.ProductRequest.MaxOrderAmount">
+            <summary>
+            Ther maxium amount a user can order
+            </summary>
+        </member>
+    </members>
+</doc>
