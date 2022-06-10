@@ -47,17 +47,18 @@ namespace Tienda365.API.Controllers
                 var dbProducts = await _productService.GetProducts(numberOfItemsPerPage, page);
                 var retProducts = new List<ProductModel>();
                 _logger.LogTrace(limit.ToString());
-
+                var baseUrl = "https://localhost:5001/images/";
                 foreach (var item in dbProducts)
                 {
                     retProducts.Add(new ProductModel
                     {
                         Id = item.Id,
                         Name = item.Name,
-                        Image = item.Image,
+                        Image = baseUrl + item.Image,
                         MRPAmount = item.MRPAmount,
                         Discount = item.DiscountPercentage,
-                        InStock = item.InStock
+                        InStock = item.InStock,
+                        MaxOrderQuantity = item.MaxOrderAmount
                     });
                 }
                 return StatusCode(StatusCodes.Status200OK, new ProductResponse { Products = retProducts, CurrentPage = page });

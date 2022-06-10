@@ -150,9 +150,16 @@ namespace Tienda365.API
             }
             app.UseSwagger();
             app.UseSwaggerUI();
+            //app.AddCustomHeader();
             app.UseHttpsRedirection();
-
+            app.UseStaticFiles();
             app.UseRouting();
+            app.UseCors(options =>
+            {
+                options.AllowAnyMethod();
+                options.AllowAnyHeader();
+                options.AllowAnyOrigin();
+            });
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
             app.UseAuthentication();
             app.UseAuthorization();

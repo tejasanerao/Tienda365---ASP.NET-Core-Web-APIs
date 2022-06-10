@@ -31,5 +31,9 @@
     <ProjectReference Include="..\Tienda365.BL\Tienda365.BL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 
 </Project>

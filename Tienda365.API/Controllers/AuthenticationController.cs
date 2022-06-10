@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +19,7 @@ using Tienda365.BL;
 using Tienda365.BL.Interface;
 using Tienda365.BL.Models;
 using Tienda365.DL;
+using Tienda365.DL.Entities;
 
 namespace Tienda365.API.Controllers
 {
@@ -33,6 +35,35 @@ namespace Tienda365.API.Controllers
         {
             this._authenticationService = authenticationService;
             this._configuration = configuration;
+        }
+
+        [HttpGet]
+        [Route("details")]
+        [Authorize]
+        public async Task<IActionResult> GetDetails()
+        {
+            try
+            {
+                var user = HttpContext.User;
+                var claims = HttpContext.User.Claims.ToList();
+                var emailClaim = claims.FirstOrDefault(x => x.Type == ClaimTypes.Email);
+                var email = emailClaim.Value;
+                var details = await _authenticationService.GetDetails(email);
+                if (details.Email != null)
+                {
+                    return Ok(details);
+                }
+                var res = new Response();
+                res.Message.Add($"Try to login again!");
+                return StatusCode(StatusCodes.Status401Unauthorized, res);
+
+            }catch(Exception ex)
+            {
+                var res = new Response();
+                res.Message.Add($"Some Error Occurred: {ex.ToString()}");
+                return StatusCode(StatusCodes.Status500InternalServerError, res);
+            }
+            
         }
 
         /// <summary>
@@ -64,7 +95,7 @@ namespace Tienda365.API.Controllers
                 {
                     var res = new Response();
                     res.Message = result.Item2;
-                    return StatusCode(StatusCodes.Status400BadRequest, res);
+                    return StatusCode(StatusCodes.Status417ExpectationFailed, res);
                 }
             }
             catch (Exception ex)
@@ -97,7 +128,7 @@ namespace Tienda365.API.Controllers
                 else
                 {
                     var res = new Response();
-                    res.Message.Add("Some Error Occurred!");
+                    res.Message.Add(result.Item2);
                     return StatusCode(StatusCodes.Status400BadRequest, res);
                 }
                 return Ok();
@@ -110,6 +141,8 @@ namespace Tienda365.API.Controllers
             }
 
         }
+
+        
 
 
         private LoginResponse GenerateJwt(string email, string id)

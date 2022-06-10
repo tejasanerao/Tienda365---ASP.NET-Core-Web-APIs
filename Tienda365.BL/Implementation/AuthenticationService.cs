@@ -32,6 +32,30 @@ namespace Tienda365.BL.Implementation
             _configuration = configuration;
         }
 
+        public async Task<UserBL> GetDetails(string email)
+        {
+            try
+            {
+                var userInfo = await _userManager.FindByEmailAsync(email);
+                if(userInfo != null)
+                {
+                    return new UserBL
+                    {
+                        Email = email,
+                        Address = userInfo.Address,
+                        FirstName = userInfo.FirstName,
+                        LastName = userInfo.LastName,
+                        PhoneNumber = userInfo.PhoneNumber
+                    };
+                }
+                return new UserBL { Email = null};
+            }
+            catch
+            {
+                return new UserBL { Email = null };
+            }
+        }
+
         public async Task<Tuple<bool, string>> LoginUser(string email, string password)
         {
             try
@@ -41,11 +65,11 @@ namespace Tienda365.BL.Implementation
                 {
                     return Tuple.Create(true, userInfo.Id);   
                 }
-                return Tuple.Create(false, "");
+                return Tuple.Create(false, "Username or Password is incorrect!");
             }
             catch
             {
-                return Tuple.Create(false, "");
+                return Tuple.Create(false, "Some error occurred!");
             }
         }
 

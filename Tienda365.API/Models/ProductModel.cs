@@ -15,6 +15,7 @@ namespace Tienda365.API.Models
         public string Image { get; set; }
         public double MRPAmount { get; set; }
         public int Discount { get; set; }
+        public int MaxOrderQuantity { get; set; }
         public bool InStock { get; set; }
     }
 }
